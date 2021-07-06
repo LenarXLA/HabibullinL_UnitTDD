@@ -11,6 +11,14 @@ public class Calc {
         Object secondVal = scanner.next();
         scanner.close();
 
+        try {
+            firstVal = Integer.parseInt(String.valueOf(firstVal));
+            secondVal = Integer.parseInt(String.valueOf(secondVal));
+        } catch (Exception e) {
+            System.out.println("Введены некорректный(ые) символ(ы) значеня(ий)");
+            System.exit(5);
+        }
+
         if ("+".equals(action)) {
             System.out.printf("Результат после сложения: %s%n", addition(firstVal, secondVal));
         } else if ("-".equals(action)) {
@@ -37,6 +45,9 @@ public class Calc {
     }
 
     public Object division(Object first, Object second) {
+        if (Integer.parseInt(String.valueOf(second)) == 0) {
+            throw new IllegalArgumentException("Number can not be divide by 0!");
+        }
         return Integer.parseInt(String.valueOf(first)) / Integer.parseInt(String.valueOf(second));
     }
 }

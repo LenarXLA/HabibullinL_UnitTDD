@@ -11,9 +11,9 @@ public class CalcTest {
     public static Object[][] inputForAddition(Method m) {
         switch (m.getName()) {
             case "additionEquals":
-                return new Object[][] {{5, 1, 4}, {10, 20, -10}, {-1, -2147483648, 2147483647}, {-1, -1, 0}};
+                return new Object[][] {{5, 2, 3}, {10, 20, -10}, {-1, -2147483648, 2147483647}, {-1, -1, 0}};
             case "additionEqualsNegative":
-                return new Object[][] {{8, 6, 5}, {11, 10, 2}, {4, 9, -6}, {-2, 10, -9}};
+                return new Object[][] {{8, 3, 5}, {11, 10, 2}, {4, 9, -6}, {-2, 10, -9}}; // !!!!Здесь {8, 3, 5} для проверки Assert.assertNotEquals!!!!
             case "additionEqualsObject":
                 return new Object[][] {{"test", 4, 7}, {1, null, 1}, {11, -11, "eleven"}, {45, "ten", 55}};
         }
@@ -67,9 +67,10 @@ public class CalcTest {
 
     @Test(dataProvider = "inputForAddition", groups = { "negative" })
     public void additionEqualsNegative(Object res, Object first, Object second) {
-        Assert.assertNotEquals(res, new Calc().addition(first, second));
+        Assert.assertNotEquals(res, new Calc().addition(first, second), "Значения равны!");
     }
 
+    // "выбрасываемые эксепшены" с объектами обрабатываю с параметром expectedExceptions
     @Test(dataProvider = "inputForAddition", groups = { "object" }, expectedExceptions = {NumberFormatException.class, ClassCastException.class, NullPointerException.class, AssertionError.class})
     public void additionEqualsObject(Object res, Object first, Object second) {
         Assert.assertEquals(res, new Calc().addition(first, second));
@@ -83,7 +84,7 @@ public class CalcTest {
 
     @Test(dataProvider = "inputForSubtraction", groups = { "negative" })
     public void subtractionEqualsNegative(Object res, Object first, Object second) {
-        Assert.assertNotEquals(res, new Calc().subtraction(first, second));
+        Assert.assertNotEquals(res, new Calc().subtraction(first, second), "Значения равны!");
     }
 
     @Test(dataProvider = "inputForSubtraction", groups = { "object" }, expectedExceptions = {NumberFormatException.class, ClassCastException.class, NullPointerException.class, AssertionError.class})
@@ -99,7 +100,7 @@ public class CalcTest {
 
     @Test(dataProvider = "inputForMultiplication", groups = { "negative" })
     public void multiplicationEqualsNegative(Object res, Object first, Object second) {
-        Assert.assertNotEquals(res, new Calc().multiplication(first, second));
+        Assert.assertNotEquals(res, new Calc().multiplication(first, second), "Значения равны!");
     }
 
     @Test(dataProvider = "inputForMultiplication", groups = { "object" }, expectedExceptions = {NumberFormatException.class, ClassCastException.class, NullPointerException.class, AssertionError.class})
@@ -115,7 +116,7 @@ public class CalcTest {
 
     @Test(dataProvider = "inputForDivision", groups = { "negative" })
     public void divisionEqualsNegative(Object res, Object first, Object second) {
-        Assert.assertNotEquals(res, new Calc().division(first, second));
+        Assert.assertNotEquals(res, new Calc().division(first, second), "Значения равны!");
     }
 
     @Test(dataProvider = "inputForDivision", groups = { "object" }, expectedExceptions = {NumberFormatException.class, ClassCastException.class, NullPointerException.class, AssertionError.class})
