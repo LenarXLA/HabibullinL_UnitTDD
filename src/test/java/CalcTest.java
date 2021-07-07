@@ -13,7 +13,7 @@ public class CalcTest {
             case "additionEquals":
                 return new Object[][] {{5, 2, 3}, {10, 20, -10}, {-1, -2147483648, 2147483647}, {-1, -1, 0}};
             case "additionEqualsNegative":
-                return new Object[][] {{8, 3, 5}, {11, 10, 2}, {4, 9, -6}, {-2, 10, -9}}; // !!!!Здесь {8, 3, 5} для проверки Assert.assertNotEquals!!!!
+                return new Object[][] {{8, 3, 4}, {11, 10, 2}, {4, 9, -6}, {-2, 10, -9}};
             case "additionEqualsObject":
                 return new Object[][] {{"test", 4, 7}, {1, null, 1}, {11, -11, "eleven"}, {45, "ten", 55}};
         }
